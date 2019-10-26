@@ -37,12 +37,14 @@ func processJwtAuthentication( next http.Handler) http.Handler {
 
 		splittedToken := strings.Split( headerToken, " " )
 
-		if 2 != len( splittedToken ) {
+		if 2 != len( splittedToken ) { // http token length error
 			//newResponse = utils.makeHttpMessage( false, "eErrorNotInvalidTokenFormat" )
 			response.WriteHeader( http.StatusForbidden )
 			response.Header().Add( "Content-Type", "application/json" )
 			//utils.makeResponseHttpToJson( response, newResponse )
 			return
 		}
+
+		
 	})
 }
