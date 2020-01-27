@@ -1,4 +1,4 @@
-package channel
+package posting
 
 import (
 	"time"
@@ -6,10 +6,10 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type Channel struct {
+type Posting struct {
 	gorm.Model
-	channelId   int32  `gorm:"primary_key;auto_increment" json:"id"`
-	name        string `gorm:"size:255;not null;unique" json:"name"`
+	postinglId  int32  `gorm:"primary_key;auto_increment" json:"id"`
+	title       string `gorm:"size:255;not null;unique" json:"title"`
 	description string `json:"description"`
 
 	createdAt time.Time `gorm:"default:CURRENT_TIMESTAMP" json:"created_at"`
