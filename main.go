@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/gorilla/mux"
-	"os"
 	"fmt"
 	"net/http"
+	"os"
+
+	"github.com/gorilla/mux"
 )
 
 func main() {
@@ -17,8 +18,8 @@ func main() {
 		port = "8000"
 	}
 
-	err := http.ListenAndServe( ":" + port, router )
+	err := http.ListenAndServe(":"+port, router)
 	if err != nil {
-		fmt.Print ( err )
+		fmt.Print(err)
 	}
 }
