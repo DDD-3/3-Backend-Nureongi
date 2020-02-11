@@ -1,8 +1,12 @@
 package routes
 
-import (
-	"github.com/HodongMan/nureongi-server/middleware"
-)
+func (server *ServiceServer) setRoutes() {
+	erver.Router.HandleFunc("/channel", middleware.setJSONNormailDataAtMiddleware(channel.getChannels)).Methods("GET")
+}
 
+/*
+func (server *ServiceServer) setRoutes() {
 
-func (server *ServiceServer)
+	server.Router.HandleFunc("/channel", middleware.setJSONNormailDataAtMiddleware(server.CreatePost)).Methods("GET")
+}
+*/

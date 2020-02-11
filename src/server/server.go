@@ -31,9 +31,16 @@ func (server *ServiceServer) initializeServiceServer(DatabaseDriver, DatabaseUse
 	server.DB.Debug().AutoMigrate(&channel.Channel{})
 
 	server.router = mux.NewRouter()
+	server.setRoutes()
+
+	server.isValid = true
 }
 
 func (server *ServiceServer) runServer(port string) {
+
+	if false == server.isValid {
+
+	}
 
 	err := http.ListenAndServe(":"+port, server.router)
 	if err != nil {

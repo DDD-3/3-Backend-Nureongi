@@ -1,25 +1,18 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
 	"os"
 
-	"github.com/gorilla/mux"
+	"github.com/hodongman/github.com/HodongMan/nureongi-server/server"
 )
 
 func main() {
-
-	router := mux.NewRouter()
-	//router.Use(  ) 인증 미들웨어 등록
 
 	port := os.Getenv("PORT")
 	if "" == port {
 		port = "8000"
 	}
 
-	err := http.ListenAndServe(":"+port, router)
-	if err != nil {
-		fmt.Print(err)
-	}
+	server.Initialize(os.Getenv("DB_DRIVER"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_PORT"), os.Getenv("DB_HOST"), os.Getenv("DB_NAME"))
+
 }
