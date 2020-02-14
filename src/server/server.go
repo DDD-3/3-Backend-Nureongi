@@ -10,7 +10,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 
 	///////////////////////////////////////////////
-	"github.com/hodongman/github.com/HodongMan/nureongi-server/channel"
+	"github.com/HodongMan/nureongi-server/src/channel"
 )
 
 type ServiceServer struct {
