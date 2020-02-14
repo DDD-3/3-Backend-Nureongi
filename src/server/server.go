@@ -22,7 +22,7 @@ type ServiceServer struct {
 
 func (server *ServiceServer) initializeServiceServer(DatabaseDriver, DatabaseUser, DatabasePassword, DatabasePort, DatabaseHost, DatabaseName string) {
 
-	var errors error
+	//var errors error
 
 	if DatabaseDriver == "mysql" {
 
