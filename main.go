@@ -14,6 +14,13 @@ func main() {
 	}
 
 	s := server.ServiceServer{}
-	//s.initializeServiceServer(os.Getenv("DB_DRIVER"), os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_PORT"), os.Getenv("DB_HOST"), os.Getenv("DB_NAME"))
+	s.InitializeServiceServer("mysql",
+		"root",
+		"1234",
+		"3306",
+		"127.0.0.1",
+		"ddd")
+
+	s.RunServer(port)
 
 }

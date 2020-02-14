@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -11,6 +12,7 @@ import (
 
 	///////////////////////////////////////////////
 	"github.com/HodongMan/nureongi-server/src/channel"
+	"github.com/HodongMan/nureongi-server/src/posting"
 )
 
 type ServiceServer struct {
@@ -20,15 +22,23 @@ type ServiceServer struct {
 	isValid bool
 }
 
-func (server *ServiceServer) initializeServiceServer(DatabaseDriver, DatabaseUser, DatabasePassword, DatabasePort, DatabaseHost, DatabaseName string) {
+func (server *ServiceServer) InitializeServiceServer(DatabaseDriver, DatabaseUser, DatabasePassword, DatabasePort, DatabaseHost, DatabaseName string) {
 
-	//var errors error
+	var err error
 
 	if DatabaseDriver == "mysql" {
-
+		DBURL := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8&parseTime=True&loc=Local", DatabaseUser, DatabasePassword, DatabaseHost, DatabasePort, DatabaseName)
+		server.DB, err = gorm.Open(DatabaseDriver, DBURL)
+		if err != nil {
+			fmt.Printf("Cannot connect to %s database", DatabaseDriver)
+			log.Fatal("This is the error:", err)
+		} else {
+			fmt.Printf("We are connected to the %s database", DatabaseDriver)
+		}
 	}
 
 	server.DB.Debug().AutoMigrate(&channel.Channel{})
+	server.DB.Debug().AutoMigrate(&posting.Posting{})
 
 	server.router = mux.NewRouter()
 	server.setRoutes()
@@ -36,7 +46,7 @@ func (server *ServiceServer) initializeServiceServer(DatabaseDriver, DatabaseUse
 	server.isValid = true
 }
 
-func (server *ServiceServer) runServer(port string) {
+func (server *ServiceServer) RunServer(port string) {
 
 	if false == server.isValid {
 
